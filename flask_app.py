@@ -20,7 +20,7 @@ def result():
         ('view', 'Main View'),
     )
 
-    r = requests.get('https://api.airtable.com/v0/<your app id>/Tasks?api_key=<your API key>&sortField=_createdTime&sortDirection=desc', headers=headers, params=params)
+    r = requests.get('https://api.airtable.com/v0/<your app id>/<your own table>?api_key=<your API key>&sortField=_createdTime&sortDirection=desc', headers=headers, params=params)
     dict = r.json()
     dataset = []
     name_list = []
@@ -49,7 +49,7 @@ def table():
         ('view', 'Main View'),
     )
 
-    r = requests.get('https://api.airtable.com/v0/<your App ID>/Tasks?api_key=<your API key>&sortField=_createdTime&sortDirection=desc', headers=headers, params=params)
+    r = requests.get('https://api.airtable.com/v0/<your App ID>/<your own table>?api_key=<your API key>&sortField=_createdTime&sortDirection=desc', headers=headers, params=params)
     dict = r.json()
     dataset = []
     for i in dict['records']:
