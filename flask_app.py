@@ -12,7 +12,7 @@ def home():
 @app.route("/result")
 def result():
     headers = {
-        'Authorization': 'Bearer keyTcsTzckqyBTlk8',
+        'Authorization': 'Bearer <your API key>',
     }
 
     params = (
@@ -20,7 +20,7 @@ def result():
         ('view', 'Main View'),
     )
 
-    r = requests.get('https://api.airtable.com/v0/appM38HXlEVhxmnqx/Tasks?api_key=keyTcsTzckqyBTlk8&sortField=_createdTime&sortDirection=desc', headers=headers, params=params)
+    r = requests.get('https://api.airtable.com/v0/<your app id>/Tasks?api_key=<your API key>&sortField=_createdTime&sortDirection=desc', headers=headers, params=params)
     dict = r.json()
     dataset = []
     name_list = []
@@ -41,7 +41,7 @@ def result():
 @app.route("/table")
 def table():
     headers = {
-        'Authorization': 'Bearer keyTcsTzckqyBTlk8',
+        'Authorization': 'Bearer <your API key>',
     }
 
     params = (
@@ -49,7 +49,7 @@ def table():
         ('view', 'Main View'),
     )
 
-    r = requests.get('https://api.airtable.com/v0/appM38HXlEVhxmnqx/Tasks?api_key=keyTcsTzckqyBTlk8&sortField=_createdTime&sortDirection=desc', headers=headers, params=params)
+    r = requests.get('https://api.airtable.com/v0/<your App ID>/Tasks?api_key=<your API key>&sortField=_createdTime&sortDirection=desc', headers=headers, params=params)
     dict = r.json()
     dataset = []
     for i in dict['records']:
