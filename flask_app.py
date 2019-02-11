@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, json, redirect, session
 from flask import Markup
-import requests,  MySQLdb
+import requests
 
 app = Flask(__name__)
 app.config["DEBUG"] = False
