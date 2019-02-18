@@ -10,6 +10,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.1.29/c3.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.1.29/c3.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-inverse">
@@ -28,7 +31,7 @@
           <li><a href="/result">Result</a></li>
           <li class="active"><a href="/table">Table</a></li>
           <li><a href="/database">Database</a></li>
-          <li><a href="/chart">Chart</a></li>
+          <li class="active"><a href="/chart">Chart</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -38,28 +41,11 @@
     </div>
   </nav>
 <div class="jumbotron text-center">
-  <h1>Bernard's Table Page</h1>
+  <h1>Bernard's C3 Chart Page</h1>
   <p>Resize this responsive page to see the effect!</p>
 </div>
 <div class='container'>
-<table id="myTable" class="table table-striped" style="width:100%" >
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Time Estimated</th>
-        <th>Completed</th>
-      </tr>
-    </thead>
-    <tbody>
-       {% for row in  entries  %}
-          <tr>
-            <td>{{ row["Name"] }}</td>
-            <td>{{ row["Time_Estimate"] }}</td>
-            <td>{{ row["Completed"] }}</td>
-          </tr>
-        {% endfor %}
-        </tbody>
-      </table>
+ <div id="chart"></div>
 </div><!--end container-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -67,12 +53,26 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script>
       $(document).ready(function(){
-          $('#myTable').DataTable({
-            "paging":   true,
-            "ordering": true,
-            "searching": true
-          });
-      });
+        var chart = c3.generate({
+                    data: {
+                        columns: [{% for name,entry in entries %}
+                                    ['{{name}}',{{entry}}],
+                                  {% endfor %}
+                                 ],
+                       type : 'bar'
+                     },
+                    axis: {
+                      x: {label: 'Stage'},
+                      y: {label: '# of Entries'}
+                    },
+                    bar: {
+                        title: "Tasks for Each Stage:",
+                    },
+                    tooltip: {
+                        show: false,
+                    }
+                }); // end c3.generate
+      }); // end document ready
 
 </script>
 </body>
