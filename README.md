@@ -5,5 +5,6 @@ There are still many limitations in accessing related tables and more complicate
 ##
 Here is the link to the demo web site:http://bernardsys.pythonanywhere.com/
 Due to the policy of the free account on Pythonanywhere, access to external websites will be limited.
+Enter "barnett" for the username and "password" for the password.
 ## 
 To see more features, please check out this link: http://python29.kilo.ws/.
