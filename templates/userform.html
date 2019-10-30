@@ -18,13 +18,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">WebSiteName</a>
+        <a class="navbar-brand" href="#">Class Demo</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="/list_users">List Users</a></li>
-            <li><a href="/user">Add User</a></li>
+            <li class="active"><a href="/user">Add User</a></li>
             <li><a href="/chart">Chart</a></li>
             <li><a href="/map">Map</a></li>
         </ul>
@@ -36,23 +36,23 @@
     </div>
   </nav>
 <div class="jumbotron text-center">
-  <h1>Login Page</h1>
-  <p>Resize this responsive page to see the effect!</p>
-  {% if current_user.is_authenticated %}
-    <p>You're already login.</p>
-  {% else %}
-      <p>{{message}}</p>
-  {% endif %}
+  <h1>Add User Form</h1>
 </div>
 
 <div class="container">
- {% if not current_user.is_authenticated %}
- <center><form class="form-signin" style="width:30%;" method="post" action="/process">
-     <h2 class="form-signin-heading">Please sign in</h2>
-     <label for="inputEmail" class="sr-only">Student Id</label>
-     <input type="text" name="student_id" id="student_id" class="form-control" placeholder="Student Id" required autofocus>
+ {% if current_user.is_authenticated %}
+ <center><form class="form-adduser" style="width:30%;" method="post" action="/adduser">
+     <h2 class="form-signin-heading">Add a User</h2>
+     <label for="inputFname" class="sr-only">First Name</label>
+     <input type="text" name="fname" id="fname" class="form-control" placeholder="first name" required autofocus>
+     <label for="inputFname" class="sr-only">First Name</label>
+     <input type="text" name="lname" id="lname" class="form-control" placeholder="last name" required autofocus>
+     <label for="inputId" class="sr-only">Student Id</label>
+     <input type="text" name="student_id" id="student_id" class="form-control" placeholder="student Id" required>
+     <label for="inputDOB" class="sr-only">Date of Birth</label>
+     <input type="text" name="date_of_birth" id="date_of_birth" class="form-control" placeholder="YYYY-MM-DD" required>
      <label for="inputPassword" class="sr-only">Password</label>
-     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+     <input type="password" name="pwd" id="inputPassword" class="form-control" placeholder="Password" required>
      <div class="checkbox">
        <label>
          <input type="checkbox" value="remember-me"> Remember me

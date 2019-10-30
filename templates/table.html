@@ -4,12 +4,84 @@
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/css/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.0/css/select.dataTables.min.css" />  
+  <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+  * {box-sizing: border-box;}
+
+    /* Button used to open the contact form - fixed at the bottom of the page */
+    .open-button {
+      background-color: #555;
+      color: white;
+      padding: 16px 20px;
+      border: none;
+      cursor: pointer;
+      opacity: 0.8;
+      position: fixed;
+      bottom: 23px;
+      right: 28px;
+      width: 280px;
+    }
+
+    /* The popup form - hidden by default */
+    .form-popup {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      right: 15px;
+      border: 3px solid #f1f1f1;
+      z-index: 9;
+    }
+
+    /* Add styles to the form container */
+    .form-container {
+      max-width: 300px;
+      width:500px;
+      padding: 10px;
+      background-color: white;
+    }
+
+    /* Full-width input fields */
+    .form-container input[type=text], .form-container input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    /* When the inputs get focus, do something */
+    .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    /* Set a style for the submit/login button */
+    .form-container .btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom:10px;
+      opacity: 0.8;
+    }
+
+    /* Add a red background color to the cancel button */
+    .form-container .cancel {
+      background-color: red;
+    }
+
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover, .open-button:hover {
+      opacity: 1;
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar navbar-inverse">
@@ -25,55 +97,147 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
           <li><a href="/">Home</a></li>
-          <li><a href="/result">Result</a></li>
-          <li class="active"><a href="/table">Table</a></li>
-          <li><a href="/database">Database</a></li>
+          <li class="active"><a href="/list_users">List Users</a></li>
+          <li><a href="/user">Add User</a></li>
           <li><a href="/chart">Chart</a></li>
+          <li><a href="/map">Map</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
           <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>
       </div>
     </div>
   </nav>
 <div class="jumbotron text-center">
-  <h1>Bernard's Table Page</h1>
+  <h1>User Listing Page</h1>
   <p>Resize this responsive page to see the effect!</p>
 </div>
 <div class='container'>
-<table id="myTable" class="table table-striped" style="width:100%" >
+  <table id="myTable" class="dataTable table table-striped" style="width:100%" >
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Time Estimated</th>
-        <th>Completed</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Student Id</th>
+        <th>Date of Birth</th>
+        <th>Record Id</th>
       </tr>
     </thead>
     <tbody>
        {% for row in  entries  %}
           <tr>
-            <td>{{ row["Name"] }}</td>
-            <td>{{ row["Time_Estimate"] }}</td>
-            <td>{{ row["Completed"] }}</td>
+            <td>{{ row["fname"] }}</td>
+            <td>{{ row["lname"] }}</td>
+            <td>{{ row["student_id"] }}</td>
+            <td>{{ row["date_of_birth"] }}</td>
+            <td>{{ row["record_id"] }}</td>
           </tr>
         {% endfor %}
         </tbody>
-      </table>
-</div><!--end container-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script>
-      $(document).ready(function(){
-          $('#myTable').DataTable({
-            "paging":   true,
-            "ordering": true,
-            "searching": true
-          });
-      });
+  </table>
+  <!--button class="open-button" onclick="openForm()">Open Form</button-->
+      <div class="form-popup" id="myUpdateForm">
+        <form class="form-container" method="post" action="/updateuser">
+          <h1>Update Entry</h1>
+          <label for="inputFname">First Name</label>
+          <input type="text" name="fname" id="upd_fname" class="form-control" placeholder="first name" required autofocus>
+          <label for="inputFname">Last Name</label>
+          <input type="text" name="lname" id="upd_lname" class="form-control" placeholder="last name" required autofocus>
+          <label for="inputId">Student Id</label>
+          <input type="text" name="student_id" id="upd_student_id" class="form-control" placeholder="student Id" required>
+          <label for="inputDOB">Date of Birth</label>
+          <input type="text" name="date_of_birth" id="upd_date_of_birth" class="form-control" placeholder="YYYY-MM-DD" required>
+          <input type="hidden" name="record_id" id="upd_record_id" class="form-control">
+          <button type="submit" class="btn">Submit</button>
+          <button type="button" class="btn cancel" onclick="closeForm('update')">Close</button>
+        </form>
+      </div>
+   
+      <div class="form-popup" id="myDeleteForm">
+          <form class="form-container" method="post" action="/deleteuser">
+            <h1>Delete Entry</h1>
+            <label for="inputFname">First Name</label>
+            <input type="text" name="fname" id="del_fname" class="form-control" placeholder="first name" disabled>
+            <label for="inputFname">Last Name</label>
+            <input type="text" name="lname" id="del_lname" class="form-control" placeholder="last name" disabled>
+            <label for="inputId">Student Id</label>
+            <input type="text" name="student_id" id="del_student_id" class="form-control" placeholder="student Id" disabled>
+            <label for="inputDOB">Date of Birth</label>
+            <input type="text" name="date_of_birth" id="del_date_of_birth" class="form-control" placeholder="YYYY-MM-DD" disabled>
+            <input type="hidden" name="record_id" id="del_record_id" class="form-control">
+            <button type="submit" class="btn">Submit</button>
+            <button type="button" class="btn cancel" onclick="closeForm('delete')">Close</button>
+          </form>
+      </div>
 
+</div><!--end container-->
+<script src="https://code.jquery.com/jquery-3.3.1.js" ></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" ></script>
+<script src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js" ></script>
+<script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js" ></script>
+<script>
+$(document).ready(function() {
+          var table = $('#myTable').DataTable( {
+              dom: 'Bfrtip',
+              select: true,
+              buttons: [
+                  {
+                      text: 'Update data',
+                      action: function ( e, dt, node, config ) {
+                          recEntry = dt.row( { selected: true } ).data(); 
+                          openForm(recEntry,'update');
+                      },
+                      enabled: false
+                  },
+                  {
+                      text: 'Delete data',
+                      action: function ( e, dt, node, config ) {
+                          recEntry = dt.row( { selected: true } ).data(); 
+                          openForm(recEntry,'delete');
+                      },
+                      enabled: false
+                  }
+              ]
+          } );
+      
+          table.on( 'select deselect', function () {
+              var selectedRows = table.rows( { selected: true } ).count();
+      
+              table.button( 0 ).enable( selectedRows === 1 );
+              table.button( 1 ).enable( selectedRows > 0 );
+          } );
+
+      } );
+</script>
+<script>
+          function openForm(recEntry,whichForm) {
+
+              if (whichForm == 'update') {
+                  document.getElementById("myUpdateForm").style.display = "block";
+                  document.getElementById("upd_fname").value = recEntry[0];
+                  document.getElementById("upd_lname").value = recEntry[1];
+                  document.getElementById("upd_student_id").value = recEntry[2];
+                  document.getElementById("upd_date_of_birth").value = recEntry[3];
+                  document.getElementById("upd_record_id").value = recEntry[4];
+              } else {
+                  document.getElementById("myDeleteForm").style.display = "block";
+                  document.getElementById("del_fname").value = recEntry[0];
+                  document.getElementById("del_lname").value = recEntry[1];
+                  document.getElementById("del_student_id").value = recEntry[2];
+                  document.getElementById("del_date_of_birth").value = recEntry[3];
+                  document.getElementById("del_record_id").value = recEntry[4];
+              }
+          }
+
+          function closeForm(whichForm) {
+            if (whichForm == 'update') {
+                document.getElementById("myUpdateForm").style.display = "none";
+            } else {
+                document.getElementById("myDeleteForm").style.display = "none";
+            }
+          }
 </script>
 </body>
 </html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.1.29/c3.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.1.29/c3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.js"></script>
+  <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
+  <style type="text/css">
+     body {
+       padding: 0;
+       margin: 0;
+     }
+     html, body, .container, .row, .col-xs-12, .col-sm-12, .col-md-12, #map {
+       height: 100%;
+     }
+   </style>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Class Demo</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/list_users">List Users</a></li>
+          <li><a href="/user">Add User</a></li>  
+          <li><a href="/chart">Chart</a></li>
+          <li class="active"><a href="/map">Map</a></li> 
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+          <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<div class="jumbotron text-center">
+  <h1>Leaflet Map Demo Page</h1>
+  <p>Resize this responsive page to see the effect!</p>
+</div>
+<div class="container">
+   <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <button type="button" class="btn btn-warning" id='roll_up' onclick="show_districts();">Show Districts</button><button type="button" class="btn btn-info" id='roll_up' onclick="clear_markers();">Clear Markers</button><br>
+       <div id="map"></div>
+       <button type="button" class="btn btn-warning" id='roll_up' onclick="show_districts();">Show Districts</button><button type="button" class="btn btn-info" id='roll_up' onclick="clear_markers();">Clear Markers</button><br><br>
+      </div><!-- column -->
+   </div><!-- row -->
+</div><!-- container-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script>
+    var mapboxTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: 'Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a>', maxZoom: 18,});
+
+    var map = L.map('map')
+       .addLayer(mapboxTiles)
+       .setView([22.287111, 114.191667], 13);
+
+     layerGroup = L.layerGroup().addTo(map);
+
+     var items = {};
+     var data = [];
+     {% for row in  entries  %}
+          items = {};
+          items["name"] = "{{ row["Name"] }}";
+          items["url"] = "{{ row["url"] }}";
+          items["image_url"] = "{{ row["img_url"] }}";
+          items["latitud"] = {{ row["Lat"] }};
+          items["longitud"] = {{ row["Lng"] }};
+          data.push(items);
+      {% endfor %}
+</script>
+<script>
+    function show_districts(){
+      for (var i in data) {
+          var latlng = L.latLng({ lat: data[i].latitud, lng: data[i].longitud });
+          L.marker( latlng )
+              .bindPopup( '<a href="' + data[i].url + '" target="_blank">' + '<img src="' + data[i].image_url+'" width = "80px"><br>'+data[i].name + '</a>' )
+              .addTo(layerGroup);
+      }
+    }
+
+    function clear_markers () {
+                   // map.removeLayer(marker);
+                   layerGroup.clearLayers();
+    }
+    </script>
+</body>
+</html>

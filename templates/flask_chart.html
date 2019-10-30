@@ -28,20 +28,20 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
           <li><a href="/">Home</a></li>
-          <li><a href="/result">Result</a></li>
-          <li class="active"><a href="/table">Table</a></li>
-          <li><a href="/database">Database</a></li>
+          <li><a href="/list_users">List Users</a></li>
+          <li><a href="/user">Add User</a></li>
           <li class="active"><a href="/chart">Chart</a></li>
+          <li><a href="/map">Map</a></li> 
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
           <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>
       </div>
     </div>
   </nav>
 <div class="jumbotron text-center">
-  <h1>Bernard's C3 Chart Page</h1>
+  <h1>C3 Chart Demo Page</h1>
   <p>Resize this responsive page to see the effect!</p>
 </div>
 <div class='container'>
@@ -62,11 +62,11 @@
                        type : 'bar'
                      },
                     axis: {
-                      x: {label: 'Stage'},
+                      x: {label: 'Product'},
                       y: {label: '# of Entries'}
                     },
                     bar: {
-                        title: "Tasks for Each Stage:",
+                        title: "Product by Category:",
                     },
                     tooltip: {
                         show: false,
