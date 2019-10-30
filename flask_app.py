@@ -63,7 +63,11 @@ def chart():
         ('view', 'Grid view'),
     )
 
+<<<<<<< HEAD
     r = requests.get('https://api.airtable.com/v0/<replace with your own app key>/Roll-up?api_key=<replace with your own Airtable API key>', headers=headers, params=params)
+=======
+    r = requests.get('https://api.airtable.com/v0/appM38HXlEVhxmnqx/Stage?api_key=<your API key>&sortField=_createdTime&sortDirection=desc', headers=headers, params=params)
+>>>>>>> 6d3299f55b654c3aa68ea5badfa839f872b46734
     dict1 = r.json()
     dict2 = {}
     dataset = []
