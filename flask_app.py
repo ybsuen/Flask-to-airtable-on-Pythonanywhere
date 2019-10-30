@@ -70,7 +70,7 @@ def chart():
         ('view', 'Grid view'),
     )
 
-    r = requests.get('https://api.airtable.com/v0/appM38HXlEVhxmnqx/Stage?api_key=keyTcsTzckqyBTlk8&sortField=_createdTime&sortDirection=desc', headers=headers, params=params)
+    r = requests.get('https://api.airtable.com/v0/appM38HXlEVhxmnqx/Stage?api_key=<your API key>&sortField=_createdTime&sortDirection=desc', headers=headers, params=params)
     dict1 = r.json()
     dict2 = {}
     dataset = []
