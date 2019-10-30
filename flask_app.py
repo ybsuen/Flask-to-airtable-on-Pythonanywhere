@@ -181,7 +181,6 @@ def deleteuser():
     url = "https://api.airtable.com/v0/<replace with your own Airtable App key>/Users/"
     record_id = request.form['record_id']
     headers = {'Authorization': 'Bearer <replace with your own Airtable API key>', 'Content-Type': 'application/x-www-form-urlencoded'}
-    # r = requests.delete('https://api.airtable.com/v0/appM38HXlEVhxmnqx/flaskdemo/reczHAuDe1UxDw5HW',headers=headers)
     r = requests.delete(url + record_id, headers=headers)
     message = 'Please enter user information.'
     return render_template('home.html',message=message)
@@ -197,7 +196,6 @@ def process():
     'Authorization': 'Bearer <replace with your own Airtable API key>',
     }
 
-    # filter = 'IF(AND({UserName}="'+username+'",{Pwd}="'+password+'"), 1, 0)'
     filter = 'IF(({student_id}="'+student_id+'"), 1, 0)'
 
     params = (
