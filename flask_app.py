@@ -12,14 +12,14 @@ app.secret_key = 'why would I tell you my secret key?'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 # MySQL configurations
-app.config['MYSQL_DATABASE_USER'] = 'XXXXXX'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'XXXXXX'
-app.config['MYSQL_DATABASE_DB'] = 'XXXXXX'
-app.config['MYSQL_DATABASE_HOST'] = 'XXXXXX'
+app.config['MYSQL_DATABASE_USER'] = 'xxxxxxxxxxx'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'xxxxxxxxxxx'
+app.config['MYSQL_DATABASE_DB'] = 'xxxxxxxxxxx'
+app.config['MYSQL_DATABASE_HOST'] = 'xxxxxxxxxxx'
 mysql.init_app(app)
 
 app.config["DEBUG"] = False
-app.config['SECRET_KEY'] = "XXXXXX"
+app.config['SECRET_KEY'] = "xxxxxxxxxxx"
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -41,10 +41,10 @@ def home():
 @login_required
 def table():
     headers = {
-        'Authorization': '<replace with your own Airtable API key>',
+        'Authorization': 'Bearer <replace with your own Airtable API key>',
     }
 
-    r = requests.get('https://api.airtable.com/v0/<replace with your own app key>/Users?sortField=_createdTime&sortDirection=desc', headers=headers)
+    r = requests.get('https://api.airtable.com/v0/<replace with your own Airtable App key>/Users?sortField=_createdTime&sortDirection=desc', headers=headers)
     dict = r.json()
     dataset = []
     for i in dict['records']:
@@ -56,18 +56,14 @@ def table():
 @login_required
 def chart():
     headers = {
-        'Authorization': '<replace with your own Airtable API key>',
+        'Authorization': 'Bearer <replace with your own Airtable API key>',
     }
 
     params = (
         ('view', 'Grid view'),
     )
 
-<<<<<<< HEAD
-    r = requests.get('https://api.airtable.com/v0/<replace with your own app key>/Roll-up?api_key=<replace with your own Airtable API key>', headers=headers, params=params)
-=======
-    r = requests.get('https://api.airtable.com/v0/appM38HXlEVhxmnqx/Stage?api_key=<your API key>&sortField=_createdTime&sortDirection=desc', headers=headers, params=params)
->>>>>>> 6d3299f55b654c3aa68ea5badfa839f872b46734
+    r = requests.get('https://api.airtable.com/v0/<replace with your own Airtable App key>/Roll-up?api_key=<replace with your own Airtable API key>', headers=headers, params=params)
     dict1 = r.json()
     dict2 = {}
     dataset = []
@@ -85,13 +81,13 @@ def chart():
 @login_required
 def map():
     headers = {
-        'Authorization': '<replace with your own Airtable API key>',
+        'Authorization': 'Bearer <replace with your own Airtable API key>',
     }
 
     params = (
         ('view', 'Grid view'),
     )
-    r = requests.get('https://api.airtable.com/v0/<replace with your own app key>/Venues?api_key=<replace with your own Airtable API key>', headers=headers, params=params)
+    r = requests.get('https://api.airtable.com/v0/<replace with your own Airtable App key>/Venues?api_key=<replace with your own Airtable API key>', headers=headers, params=params)
     dict = r.json()
     dataset = []
     data = []
@@ -133,8 +129,8 @@ def adduser():
         'pwd': pwd
     }
     data = {"fields": mydict}
-    headers = {'Authorization': '<replace with your own Airtable API key>', 'Content-Type': 'application/json; charset=utf-8'}
-    r = requests.post('https://api.airtable.com/v0/<replace with your own app key>/Users',json=data,headers=headers)
+    headers = {'Authorization': 'Bearer <replace with your own Airtable API key>', 'Content-Type': 'application/json; charset=utf-8'}
+    r = requests.post('https://api.airtable.com/v0/<replace with your own Airtable App key>/Users',json=data,headers=headers)
     message = 'Please enter user information.'
     return render_template('home.html',message=message)
 
@@ -143,9 +139,9 @@ def adduser():
 def updateuser():
     record_id = request.form['record_id']
     headers = {
-        'Authorization': '<replace with your own Airtable API key>',
+        'Authorization': 'Bearer <replace with your own Airtable API key>',
     }
-    r = requests.get('https://api.airtable.com/v0/<replace with your own app key>/Users/' + record_id, headers=headers)
+    r = requests.get('https://api.airtable.com/v0/<replace with your own Airtable App key>/Users/' + record_id, headers=headers)
     dict = r.json()
     dict_list = dict['fields']
     for i in dict_list:
@@ -174,17 +170,17 @@ def updateuser():
       ]
     }
 
-    headers = {'Authorization': '<replace with your own Airtable API key>', 'Content-Type': 'application/json; charset=utf-8'}
-    r = requests.put('https://api.airtable.com/v0/<replace with your own app key>/Users',json=data,headers=headers)
+    headers = {'Authorization': 'Bearer <replace with your own Airtable API key>', 'Content-Type': 'application/json; charset=utf-8'}
+    r = requests.put('https://api.airtable.com/v0/<replace with your own Airtable App key>/Users',json=data,headers=headers)
     message = 'Please enter user information.'
     return render_template('home.html',message=message)
 
 @app.route("/deleteuser",methods=['POST','DELETE'])
 @login_required
 def deleteuser():
-    url = "https://api.airtable.com/v0/<replace with your own app key>/Users/"
+    url = "https://api.airtable.com/v0/<replace with your own Airtable App key>/Users/"
     record_id = request.form['record_id']
-    headers = {'Authorization': '<replace with your own Airtable API key>', 'Content-Type': 'application/x-www-form-urlencoded'}
+    headers = {'Authorization': 'Bearer <replace with your own Airtable API key>', 'Content-Type': 'application/x-www-form-urlencoded'}
     # r = requests.delete('https://api.airtable.com/v0/appM38HXlEVhxmnqx/flaskdemo/reczHAuDe1UxDw5HW',headers=headers)
     r = requests.delete(url + record_id, headers=headers)
     message = 'Please enter user information.'
@@ -198,7 +194,7 @@ def process():
     hashed = ''
     user = ''
     headers = {
-    'Authorization': '<replace with your own Airtable API key>',
+    'Authorization': 'Bearer <replace with your own Airtable API key>',
     }
 
     # filter = 'IF(AND({UserName}="'+username+'",{Pwd}="'+password+'"), 1, 0)'
@@ -211,7 +207,7 @@ def process():
 
     dataset = []
     r = requests.session()
-    r = requests.get('https://api.airtable.com/v0/<replace with your own app key>/Users?sortField=_createdTime&sortDirection=desc', headers=headers, params=params)           
+    r = requests.get('https://api.airtable.com/v0/<replace with your own Airtable App key>/Users?sortField=_createdTime&sortDirection=desc', headers=headers, params=params)
 
     dict = r.json()
 
