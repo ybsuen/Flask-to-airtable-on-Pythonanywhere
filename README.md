@@ -7,5 +7,3 @@ To see a demo, please check out the following links: http://python29.kilo.ws/ or
 <br>
 username:demo_user<br>
 password:password
-
-[Link](http://python29.kilo.ws "title" target="_blank")
