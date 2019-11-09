@@ -5,5 +5,5 @@ There are limitations in hosting Flask application on Pythonanywhere using the f
 ## 
 To see a demo, please check out the following links: http://python29.kilo.ws/ or http://python30.kilo.ws/.
 <br>
-username:demo_user<br>
+username:demo<br>
 password:password
