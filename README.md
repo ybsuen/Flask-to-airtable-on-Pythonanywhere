@@ -3,7 +3,7 @@ This simple code demonstration provides a quick starting point for making use of
 ##
 There are limitations in hosting Flask application on Pythonanywhere using the free account. Thus, I've moved the sample application to a privately hosted server. Please make sure you change the App ID, API key, table names and field names to suit your own needs.
 ## 
-To see a demo, please check out the following links: https://python29.cuhkcfe.io/ or https://python30.cuhkcfe.io/.
+To see a demo, please check out the following links: http://python29.cuhkcfe.io/ or http://python30.cuhkcfe.io/.
 <br>
 username:demo<br>
 password:password
